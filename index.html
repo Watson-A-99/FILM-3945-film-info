@@ -200,6 +200,12 @@
     img.film-img {
       object-fit: cover;      /* crops real images neatly */
     }
+    img.film-img.film-img--upper {
+      object-position: center top;
+    }
+    img.film-img.film-img--lower {
+      object-position: center bottom;
+    }
     .film-title {
       font-size: 1.25rem;
       font-weight: 700;
@@ -389,11 +395,11 @@
         <article class="card film-card h-100">
           <!-- IMAGE AREA: replace this div with
                <img src="images/spood.jpg" class="film-img" alt="Still from Spood"> -->
-          <div class="film-img">Film image</div>
+          <img src="Images/Edit_spider_image_reflection_20260916234525.jpeg" class="film-img" alt="photo of jumping spider">
 
           <div class="card-body">
             <span class="genre-tag">Drama</span>
-            <h4 class="film-title">Spood</h4>
+            <h4 class="film-title">Spoods</h4>
             <p class="film-meta font-mono mb-2">Director: <span class="film-director">Aimee Watson</span></p>
             <p class="film-logline mb-0">A college student who is afraid of spiders encounters and slowly befriends a jumping spider, challenging their view of spiders.</p>
           </div>
@@ -406,25 +412,24 @@
           <div class="film-details d-none">
             <p class="mb-1"><span class="label">Roles needed:</span></p>
             <ul>
-              <li> Evelyn (Late teens, early 20s) – the older sister, practical and tired</li>
+              <li> Evelyn (Late teens, early 20s) – a stressed art student who is afraid of spiders</li>
             </ul>
-            <p><span class="label">Shoot dates:</span> Oct. 24 – 26</p>
-            <p><span class="label">Notes:</span> This is a non-dialogue short film</p>
+            <p><span class="label">Notes:</span> This is a non-dialogue short film. <b>Role requires no/limited fear of spiders.</b> Spider interactions include: sitting across from a jumping spider, having hand somewhat near the jumping spider, and catching a house spider with a cup and paper. While there is no  scripted direct spider handling, <b>the actor must be able to remain calm if the jumping spider happens to jump on their hand.</b></p>
           </div>
         </article>
       </div>
 
-      <!-- ----- FILM CARD: Night Shift (Horror) ----- -->
+      <!-- ----- FILM CARD: Cruelty of the Shadows (Horror) ----- -->
       <div class="col" data-category="horror">
         <article class="card film-card h-100">
           <!-- IMAGE AREA -->
-          <div class="film-img">Film image</div>
+          <img src="Images/79fa250bb352bd65ea87c9ca52a46a87.jpg" class="film-img film-img--upper" alt="creepy shadow">
 
           <div class="card-body">
             <span class="genre-tag">Horror</span>
-            <h4 class="film-title">Night Shift</h4>
-            <p class="film-meta font-mono mb-2">Director: <span class="film-director">Luis Ferreira</span></p>
-            <p class="film-logline mb-0">On her last shift before moving away, a diner waitress must choose between a regular's plea for help and her own escape.</p>
+            <h4 class="film-title">Cruelty of the Shadows</h4>
+            <p class="film-meta font-mono mb-2">Director: <span class="film-director">Lily Justham</span></p>
+            <p class="film-logline mb-0">Which is more more terrifying: the law, or the law of supernatural?</p>
           </div>
 
           <div class="card-footer">
@@ -435,15 +440,71 @@
           <div class="film-details d-none">
             <p class="mb-1"><span class="label">Roles needed:</span></p>
             <ul>
-              <li>Rosa (25–35) – the waitress</li>
-              <li>Earl (60+) – a lonely regular</li>
-              <li>Cook (any age) – a few lines</li>
+              <li>1 male, 20s </li>
+              <li>Creature (can be anyone)</li>
             </ul>
-            <p><span class="label">Shoot dates:</span> Nov. 2 – 3 (overnight)</p>
-            <p><span class="label">Location:</span> Local diner, Salt Lake City</p>
           </div>
         </article>
       </div>
+
+
+
+      <!-- ----- FILM CARD: Jumpstart (Comedy) ----- -->
+      <div class="col" data-category="comedy">
+        <article class="card film-card h-100">
+          <!-- IMAGE AREA -->
+          <img src="Images/360_F_706351382_xdpcbDFtD7z9CLGk9wyoaBl0DwvMigWp.jpg" class="film-img film-img--upper" alt="cumper cables">
+
+          <div class="card-body">
+            <span class="genre-tag">Comedy</span>
+            <h4 class="film-title">Jumpstart</h4>
+            <p class="film-meta font-mono mb-2">Director: <span class="film-director">Zackary Williams</span></p>
+            <p class="film-logline mb-0">A man attempts to jumpstart a woman’s car, with zero knowledge of how to do so, in order ask her out.</p>
+          </div>
+
+          <div class="card-footer">
+            <button type="button" class="btn btn-film" data-bs-toggle="modal" data-bs-target="#filmModal">More info</button>
+          </div>
+
+          <!-- DETAILS -->
+          <div class="film-details d-none">
+            <p class="mb-1"><span class="label">Roles needed:</span></p>
+            <ul>
+              <li>2 men and 1 woman around same age to each other</li>
+            
+            </ul>
+          </div>
+        </article>
+      </div>
+
+      <!-- ----- FILM CARD: Wrong Day (Comedy) ----- -->
+      <div class="col" data-category="comedy">
+        <article class="card film-card h-100">
+          <!-- IMAGE AREA -->
+          <img src="Images/fredie_marufu-basketball-7208989_1920.jpg" class="film-img film-img--lower" alt="basketball net">
+
+          <div class="card-body">
+            <span class="genre-tag">Comedy</span>
+            <h4 class="film-title">Wrong Day</h4>
+            <p class="film-meta font-mono mb-2">Director: Henoke Tadesse<span class="film-director">Lily Justham</span></p>
+            <p class="film-logline mb-0">On game day, a determined 1v1 basketball player arrives at the gym locked in and ready to compete only to discover he’s two days early.</p>
+          </div>
+
+          <div class="card-footer">
+            <button type="button" class="btn btn-film" data-bs-toggle="modal" data-bs-target="#filmModal">More info</button>
+          </div>
+
+          <!-- DETAILS -->
+          <div class="film-details d-none">
+            <p class="mb-1"><span class="label">Roles needed:</span></p>
+            <ul>
+              <li>Player (male) </li>
+              <li>Coach (male) </li>
+            </ul>
+          </div>
+        </article>
+      </div>
+
 
     </div>
 
