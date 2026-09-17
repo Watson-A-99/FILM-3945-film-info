@@ -58,7 +58,8 @@
 
     /* Easy-to-see keyboard focus */
     a:focus-visible,
-    button:focus-visible {
+    button:focus-visible,
+    select:focus-visible {
       outline: 3px solid var(--orange);
       outline-offset: 3px;
       box-shadow: none;
@@ -140,14 +141,26 @@
       color: var(--gray-text);
     }
 
+    /* ===== MOBILE / STACKED LAYOUT (below Bootstrap's "lg", 992px) =====
+       Below this width the title and the When/Where card stack on top
+       of each other, so everything in the banner gets centered.       */
+    @media (max-width: 991.98px) {
+      .callout-card {
+        margin-right: auto;   /* was 4rem, which pushed the card left */
+      }
+      .intro {
+        margin-left: auto;    /* centers the 60ch-wide text block itself */
+        margin-right: auto;
+      }
+    }
+
     /* --- Section headings --- */
     .section-title {
       font-size: clamp(1.75rem, 4vw, 2.5rem);
       margin-bottom: 1rem;
     }
 
-    /* Small genre tag shown on each card, since there are no more
-       section headings to group films by genre */
+    /* Small genre tag shown on each card */
     .genre-tag {
       display: inline-block;
       font-family: "Courier Prime", "Courier New", Courier, monospace;
@@ -161,23 +174,25 @@
       margin-bottom: 0.6rem;
     }
 
-    /* --- Filter buttons (pill style) --- */
-    .filter-btn {
+    /* --- Filter dropdown --- */
+    .filter-select {
       background-color: var(--gray-bg);
       color: var(--black);
       border: 0;
       border-radius: 50rem;
-      padding: 0.45rem 1.1rem;
+      padding: 0.6rem 2.5rem 0.6rem 1.1rem;  /* extra right padding leaves room for the arrow */
       font-weight: 500;
+      width: 100%;           /* full width on phones = easy to tap */
+      cursor: pointer;
     }
-    .filter-btn:hover {
-      background-color: #E8E8E4;
-      color: var(--black);
+    .filter-select:focus {
+      box-shadow: none;      /* focus-visible outline above handles this */
     }
-    .filter-btn.active,
-    .filter-btn.active:hover {
-      background-color: var(--black);
-      color: var(--white);
+    @media (min-width: 576px) {
+      .filter-select {
+        width: auto;
+        min-width: 14rem;
+      }
     }
 
     /* --- Film cards --- */
@@ -187,7 +202,7 @@
       box-shadow: var(--shadow);
       overflow: hidden;       /* keeps the image inside the rounded corners */
     }
-    /* Image area placeholder (swap for a real <img> later) */
+    /* Image area */
     .film-img {
       aspect-ratio: 16 / 10;
       background-color: var(--gray-bg);
@@ -241,6 +256,13 @@
       background-color: var(--black) !important;
       color: var(--white) !important;
     }
+    /* On phones the button spans the card = bigger tap target */
+    @media (max-width: 575.98px) {
+      .btn-film {
+        width: 100%;
+        padding: 0.7rem 1.25rem;
+      }
+    }
 
     /* --- Empty state (shown when a filter has no matching films yet) --- */
     #emptyState {
@@ -255,19 +277,26 @@
       border-radius: 1.25rem;
       box-shadow: var(--shadow-large);
     }
-    .modal-header,
-    .modal-footer {
+    .modal-header {
       border: 0;
       padding: 1.5rem 1.75rem 0.5rem;
     }
-    .modal-footer {
-      padding: 0.5rem 1.75rem 1.5rem;
-    }
     .modal-body {
-      padding: 0.5rem 1.75rem;
+      padding: 0.5rem 1.75rem 1.75rem;   /* extra bottom padding now that the footer is gone */
     }
     .modal-title {
       font-weight: 700;
+    }
+    /* Full-screen popup on phones has no rounded corners */
+    @media (max-width: 575.98px) {
+      .modal-content {
+        border-radius: 0;
+      }
+      .modal-header,
+      .modal-body {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+      }
     }
     .details-area {
       background-color: var(--gray-bg);
@@ -294,6 +323,7 @@
     .info-card a {
       color: var(--orange);
       font-weight: 700;
+      overflow-wrap: anywhere;   /* long email address won't overflow on small phones */
     }
 
     /* Respect users who turn off animation */
@@ -331,8 +361,10 @@
     <div class="hero">
       <div class="row align-items-center g-4">
 
-        <!-- Title -->
-        <div class="col-lg-6">
+        <!-- Title
+             text-center        = centered on phones/tablets
+             text-lg-start      = left-aligned from 992px up -->
+        <div class="col-lg-6 text-center text-lg-start">
           <h1 class="font-display">FILM 3945<br> Short Film Auditions</h1>
         </div>
 
@@ -356,8 +388,8 @@
       </div>
     </div>
 
-    <!-- Intro sentence -->
-    <p class="intro mt-4 mb-0">
+    <!-- Intro sentence (centered on phones/tablets, left from 992px up) -->
+    <p class="intro mt-4 mb-0 text-center text-lg-start">
       Browse the short films casting this semester. Use the filter to narrow by genre,
       then open a film to see the roles and shoot details.
     </p>
@@ -370,31 +402,31 @@
     <!-- Sub header -->
     <h2 class="section-title font-display">Casting Calls</h2>
 
-    <!-- ---------- Filter buttons ----------
-         data-filter must match a card's data-category below -->
-    <div class="d-flex flex-wrap align-items-center gap-2 mb-5" role="group" aria-label="Filter films by genre">
-      <span class="font-mono fw-bold me-2">Filter by genre:</span>
-      <button type="button" class="btn filter-btn active" data-filter="all" aria-pressed="true">All</button>
-      <button type="button" class="btn filter-btn" data-filter="drama" aria-pressed="false">Drama</button>
-      <button type="button" class="btn filter-btn" data-filter="horror" aria-pressed="false">Horror</button>
-      <button type="button" class="btn filter-btn" data-filter="comedy" aria-pressed="false">Comedy</button>
-      <button type="button" class="btn filter-btn" data-filter="scifi" aria-pressed="false">Sci-Fi</button>
+    <!-- ---------- Filter dropdown ----------
+         Each option's value must match a card's data-category below.
+         To add a genre: add an <option> here, then use that value
+         as data-category on the new film's card.                    -->
+    <div class="d-flex flex-column flex-sm-row align-items-sm-center gap-2 mb-4 mb-md-5">
+      <label for="genreFilter" class="font-mono fw-bold me-sm-2">Filter by genre:</label>
+      <select id="genreFilter" class="form-select filter-select">
+        <option value="all" selected>All genres</option>
+        <option value="drama">Drama</option>
+        <option value="horror">Horror</option>
+        <option value="comedy">Comedy</option>
+        <option value="scifi">Sci-Fi</option>
+      </select>
     </div>
 
     <!-- =============== ALL FILMS, ONE GRID ===============
-         Films are no longer grouped by genre section. Add each new
-         film here, in whatever order it comes in — newest at the
-         bottom (or top, your call). The genre tag on each card and
-         the filter buttons above are what let people sort by genre.
-         Just set data-category on the .col wrapper to match one of
-         the data-filter values above (drama / horror / comedy / scifi). -->
+         Add each new film in the order it comes in.
+         Set data-category on the .col wrapper to match one of
+         the dropdown option values above (drama / horror / comedy / scifi). -->
     <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4" id="filmGrid">
 
-      <!-- ----- FILM CARD: Spood (Drama) ----- -->
+      <!-- ----- FILM CARD: Spoods (Drama) ----- -->
       <div class="col" data-category="drama">
         <article class="card film-card h-100">
-          <!-- IMAGE AREA: replace this div with
-               <img src="images/spood.jpg" class="film-img" alt="Still from Spood"> -->
+          <!-- IMAGE AREA -->
           <img src="Images/Edit_spider_image_reflection_20260916234525.jpeg" class="film-img" alt="photo of jumping spider">
 
           <div class="card-body">
@@ -412,9 +444,9 @@
           <div class="film-details d-none">
             <p class="mb-1"><span class="label">Roles needed:</span></p>
             <ul>
-              <li> Evelyn (Late teens, early 20s) – a stressed art student who is afraid of spiders</li>
+              <li>Evelyn (Late teens, early 20s) – a stressed art student who is afraid of spiders</li>
             </ul>
-            <p><span class="label">Notes:</span> This is a non-dialogue short film. <b>Role requires no/limited fear of spiders.</b> Spider interactions include: sitting across from a jumping spider, having hand somewhat near the jumping spider, and catching a house spider with a cup and paper. While there is no  scripted direct spider handling, <b>the actor must be able to remain calm if the jumping spider happens to jump on their hand.</b></p>
+            <p><span class="label">Notes:</span> This is a non-dialogue short film. <b>Role requires no/limited fear of spiders.</b> Spider interactions include: sitting across from a jumping spider, having hand somewhat near the jumping spider, and catching a house spider with a cup and paper. While there is no scripted direct spider handling, <b>the actor must be able to remain calm if the jumping spider happens to jump on their hand.</b></p>
           </div>
         </article>
       </div>
@@ -429,7 +461,7 @@
             <span class="genre-tag">Horror</span>
             <h4 class="film-title">Cruelty of the Shadows</h4>
             <p class="film-meta font-mono mb-2">Director: <span class="film-director">Lily Justham</span></p>
-            <p class="film-logline mb-0">Which is more more terrifying: the law, or the law of supernatural?</p>
+            <p class="film-logline mb-0">Which is more terrifying: the law, or the law of supernatural?</p>
           </div>
 
           <div class="card-footer">
@@ -440,20 +472,18 @@
           <div class="film-details d-none">
             <p class="mb-1"><span class="label">Roles needed:</span></p>
             <ul>
-              <li>1 male, 20s </li>
+              <li>1 male, 20s</li>
               <li>Creature (can be anyone)</li>
             </ul>
           </div>
         </article>
       </div>
 
-
-
       <!-- ----- FILM CARD: Jumpstart (Comedy) ----- -->
       <div class="col" data-category="comedy">
         <article class="card film-card h-100">
           <!-- IMAGE AREA -->
-          <img src="Images/360_F_706351382_xdpcbDFtD7z9CLGk9wyoaBl0DwvMigWp.jpg" class="film-img film-img--upper" alt="cumper cables">
+          <img src="Images/360_F_706351382_xdpcbDFtD7z9CLGk9wyoaBl0DwvMigWp.jpg" class="film-img film-img--upper" alt="jumper cables">
 
           <div class="card-body">
             <span class="genre-tag">Comedy</span>
@@ -471,7 +501,6 @@
             <p class="mb-1"><span class="label">Roles needed:</span></p>
             <ul>
               <li>2 men and 1 woman around same age to each other</li>
-            
             </ul>
           </div>
         </article>
@@ -486,7 +515,7 @@
           <div class="card-body">
             <span class="genre-tag">Comedy</span>
             <h4 class="film-title">Wrong Day</h4>
-            <p class="film-meta font-mono mb-2">Director: Henoke Tadesse<span class="film-director">Lily Justham</span></p>
+            <p class="film-meta font-mono mb-2">Director: <span class="film-director">Henoke Tadesse</span></p>
             <p class="film-logline mb-0">On game day, a determined 1v1 basketball player arrives at the gym locked in and ready to compete only to discover he’s two days early.</p>
           </div>
 
@@ -498,13 +527,12 @@
           <div class="film-details d-none">
             <p class="mb-1"><span class="label">Roles needed:</span></p>
             <ul>
-              <li>Player (male) </li>
-              <li>Coach (male) </li>
+              <li>Player (male)</li>
+              <li>Coach (male)</li>
             </ul>
           </div>
         </article>
       </div>
-
 
     </div>
 
@@ -541,7 +569,7 @@
           <p class="font-mono fw-bold mb-0">Appointments &amp; Questions</p>
           <p>Text <a href="sms:8012052730">801-205-2730</a></p>
           <p class="font-mono fw-bold mb-0">Video Auditions</p>
-          <p class= "mb-0"> <i> Record short monologue clip </i> </p>
+          <p class="mb-0"><i>Record short monologue clip</i></p>
           <p class="mb-0">Email <a href="mailto:connie.wilkerson@utah.edu">connie.wilkerson@utah.edu</a></p>
         </div>
       </div>
@@ -551,9 +579,10 @@
 
   <!-- ==================== MORE INFO MODAL (popup) ====================
        One shared popup. The script at the bottom fills it in with the
-       info from whichever card's button was clicked. No image here.   -->
+       info from whichever card's button was clicked. No image here.
+       modal-fullscreen-sm-down = fills the whole screen on phones.   -->
   <div class="modal fade" id="filmModal" tabindex="-1" aria-labelledby="filmModalTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg modal-fullscreen-sm-down">
       <div class="modal-content">
 
         <div class="modal-header">
@@ -571,10 +600,6 @@
           <div class="details-area" id="modalDetails"></div>
         </div>
 
-        <div class="modal-footer">
-          <button type="button" class="btn btn-film" data-bs-dismiss="modal">Close</button>
-        </div>
-
       </div>
     </div>
   </div>
@@ -585,35 +610,26 @@
 
   <!-- ========== PAGE SCRIPT ========== -->
   <script>
-    /* ----- 1. FILTER BUTTONS -----
-       Cards live directly in one grid now (#filmGrid), each wrapped in
-       a .col that carries data-category. Filtering just shows/hides
-       those .col elements instead of whole genre sections. */
-    const filterButtons = document.querySelectorAll('.filter-btn');
+    /* ----- 1. GENRE DROPDOWN FILTER -----
+       Runs whenever the dropdown selection changes. Shows cards whose
+       data-category matches the chosen option, hides the rest. */
+    const genreFilter = document.getElementById('genreFilter');
     const filmCols = document.querySelectorAll('#filmGrid > .col');
     const emptyState = document.getElementById('emptyState');
 
-    filterButtons.forEach(function (button) {
-      button.addEventListener('click', function () {
-        const choice = button.dataset.filter; // "all", "drama", etc.
+    genreFilter.addEventListener('change', function () {
+      const choice = genreFilter.value; // "all", "drama", etc.
 
-        // Highlight the clicked button
-        filterButtons.forEach(function (b) {
-          b.classList.toggle('active', b === button);
-          b.setAttribute('aria-pressed', b === button);
-        });
-
-        // Show matching cards, hide the rest; count what's left visible
-        let visibleCount = 0;
-        filmCols.forEach(function (col) {
-          const hide = choice !== 'all' && col.dataset.category !== choice;
-          col.classList.toggle('d-none', hide);
-          if (!hide) visibleCount++;
-        });
-
-        // If a genre has no films yet, say so instead of showing a blank grid
-        emptyState.classList.toggle('d-none', visibleCount > 0);
+      // Show matching cards, hide the rest; count what's left visible
+      let visibleCount = 0;
+      filmCols.forEach(function (col) {
+        const hide = choice !== 'all' && col.dataset.category !== choice;
+        col.classList.toggle('d-none', hide);
+        if (!hide) visibleCount++;
       });
+
+      // If a genre has no films yet, say so instead of showing a blank grid
+      emptyState.classList.toggle('d-none', visibleCount > 0);
     });
 
     /* ----- 2. FILL THE MODAL WHEN "MORE INFO" IS CLICKED ----- */
@@ -621,7 +637,6 @@
 
     filmModal.addEventListener('show.bs.modal', function (event) {
       const card = event.relatedTarget.closest('.film-card');   // the card that was clicked
-      const col = card.closest('.col');                         // its grid wrapper, holds the genre
 
       document.getElementById('filmModalTitle').textContent = card.querySelector('.film-title').textContent;
       document.getElementById('modalCategory').textContent  = card.querySelector('.genre-tag').textContent;
