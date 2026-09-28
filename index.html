@@ -416,14 +416,13 @@
         <option value="drama">Drama</option>
         <option value="horror">Horror</option>
         <option value="comedy">Comedy</option>
-        <option value="scifi">Sci-Fi</option>
       </select>
     </div>
 
     <!-- =============== ALL FILMS, ONE GRID ===============
          Add each new film in the order it comes in.
          Set data-category on the .col wrapper to match one of
-         the dropdown option values above (drama / horror / comedy / scifi). -->
+         the dropdown option values above (drama / horror / comedy). -->
     <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4" id="filmGrid">
 
       <!-- ----- FILM CARD: Spoods (Drama) ----- -->
@@ -541,7 +540,7 @@
      <div class="col" data-category="horror">
        <article class="card film-card h-100">
          <!-- IMAGE AREA -->
-         <img src="Images/horrorportrait.png" class="film-img film-img--center" alt="creepy shadow">
+         <img src="Images/horrorportrait.png" class="film-img film-img--center" alt="creepy portrait painting">
 
 
          <div class="card-body">
@@ -579,7 +578,7 @@
      <div class="col" data-category="drama">
        <article class="card film-card h-100">
          <!-- IMAGE AREA -->
-         <img src="Images/citydark.jpeg" class="film-img film-img--lower" alt="creepy shadow">
+         <img src="Images/citydark.jpeg" class="film-img film-img--lower" alt="rainy city street at night">
 
 
          <div class="card-body">
@@ -612,6 +611,37 @@
          </div>
        </article>
      </div>
+
+     <!-- ----- FILM CARD: You Did It Danny (Horror) ----- -->
+     <div class="col" data-category="horror">
+       <article class="card film-card h-100">
+         <!-- IMAGE AREA -->
+         <img src="Images/Screenshot 2026-09-28 at 3.39.02 PM.png" class="film-img film-img--upper" alt=" bloody hands flipping off camera with crowbar">
+
+
+         <div class="card-body">
+           <span class="genre-tag">Horror</span>
+           <h4 class="film-title">You Did It Danny</h4>
+           <p class="film-meta font-mono mb-2">Director: <span class="film-director">Maxwell Renquist</span></p>
+           <p class="film-logline mb-0"> A man kidnapped by a snuff film director, is forced into a dangerous game of survival, forced to kill or be killed. </p>
+         </div>
+
+
+         <div class="card-footer">
+           <button type="button" class="btn btn-film" data-bs-toggle="modal" data-bs-target="#filmModal">More info</button>
+         </div>
+
+
+         <!-- DETAILS -->
+         <div class="film-details d-none">
+           <p class="mb-1"><span class="label">Roles needed:</span></p>
+          <p><span class="label">Roles:</span> 3-4 mostly male actors and a voice actor (someone willing to be a narrator) (roles would be the angry and desperate protagonist, a creepy guy with a camera, a silent killer, the man in the ear piece (who has a husky kind of creepy voice, almost perverted, like he's enjoying the violence he's watching, and a doctor). </p>
+          <p><span class="label">Notes:</span>  Theres not to much dialogue other than the narrator and news reporter, mostly just sounds of exertion. Roles can be reused, since masks will be worn for many of the roles. </p>
+
+         </div>
+       </article>
+     </div>
+
 
 
 
