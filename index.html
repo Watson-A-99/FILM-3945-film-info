@@ -218,6 +218,9 @@
     img.film-img.film-img--upper {
       object-position: center top;
     }
+    img.film-img.film-img--center {
+      object-position: center center;
+    }
     img.film-img.film-img--lower {
       object-position: center bottom;
     }
@@ -373,7 +376,7 @@
           <div class="callout-card d-flex flex-column flex-sm-row align-items-stretch">
             <div class="callout-half flex-fill">
               <p class="callout-label font-mono">When</p>
-              <p class="callout-main mb-1">Oct. 5</p>
+              <p class="callout-main mb-1">Oct. 2</p>
               <p class="callout-sub mb-0">3:00 – 5:00 PM</p>
             </div>
             <div class="callout-divider"></div>
@@ -433,7 +436,7 @@
             <span class="genre-tag">Drama</span>
             <h4 class="film-title">Spoods</h4>
             <p class="film-meta font-mono mb-2">Director: <span class="film-director">Aimee Watson</span></p>
-            <p class="film-logline mb-0">A college student who is afraid of spiders encounters and slowly befriends a jumping spider, challenging their view of spiders.</p>
+            <p class="film-logline mb-0">An art student who is afraid of spiders encounters and slowly befriends a jumping spider, challenging their view of spiders.</p>
           </div>
 
           <div class="card-footer">
@@ -534,6 +537,83 @@
         </article>
       </div>
 
+      <!-- ----- FILM CARD: Self Portrait (Horror) ----- -->
+     <div class="col" data-category="horror">
+       <article class="card film-card h-100">
+         <!-- IMAGE AREA -->
+         <img src="Images/horrorportrait.png" class="film-img film-img--center" alt="creepy shadow">
+
+
+         <div class="card-body">
+           <span class="genre-tag">Horror </span>
+           <h4 class="film-title"> Self Portrait </h4>
+           <p class="film-meta font-mono mb-2">Director: <span class="film-director"> Ian Shomsky </span></p>
+           <p class="film-logline mb-0">A woman finds a mysterious painting in her attic that she never remembers obtaining.
+
+</p>
+         </div>
+
+
+         <div class="card-footer">
+           <button type="button" class="btn btn-film" data-bs-toggle="modal" data-bs-target="#filmModal">More info</button>
+         </div>
+
+
+         <!-- DETAILS -->
+         <div class="film-details d-none">
+           <p class="mb-1"><span class="label">Roles needed:</span></p>
+           <ul>
+            <li> 1 male</li>
+            <li> 1 female</li>
+            <li> 1 person to play the portrait monster</li>
+           </ul>
+           <div class="mt-3">
+             <a href="https://docs.google.com/document/d/1FlMlHrml9itufIUVSmQUrBXokZXVhRuJbt2ix2Oj3gE/edit?usp=sharing" class="btn btn-film" target="_blank" rel="noopener noreferrer">Script</a>
+           </div>
+         </div>
+       </article>
+     </div>
+
+<!-- ----- FILM CARD: It's Better Than Ever! (Drama) ----- -->
+     <div class="col" data-category="drama">
+       <article class="card film-card h-100">
+         <!-- IMAGE AREA -->
+         <img src="Images/79fa250bb352bd65ea87c9ca52a46a87.jpg" class="film-img film-img--upper" alt="creepy shadow">
+
+
+         <div class="card-body">
+           <span class="genre-tag">Drama</span>
+           <h4 class="film-title">It's Better Than Ever!</h4>
+           <p class="film-meta font-mono mb-2">Director: <span class="film-director">Zander Lyons</span></p>
+           <p class="film-logline mb-0">James and his sister Miley face increasing financial troubles while everyone on TV says the economy is the “best it's ever been” and “It’s easy to get rich”
+           </p>
+         </div>
+
+
+         <div class="card-footer">
+           <button type="button" class="btn btn-film" data-bs-toggle="modal" data-bs-target="#filmModal">More info</button>
+         </div>
+
+
+         <!-- DETAILS -->
+         <div class="film-details d-none">
+           <p class="mb-1"><span class="label">Roles needed:</span></p>
+           <ul>
+             <li>James: Main Character, Male, Mid-20's</li>
+             <li>Miley: Supporting Lead, Female, Also Mid-20's</li>
+             <li>Customer Service Representative: Background character, voiceover.</li>
+             <li>T.V News anchor: Background character, Female, voiceover.</li>
+             <li>Larry Grin: Background character, Male, voiceover.</li>
+             <li>T.V Politician: Background character, Male, voiceover.</li>
+           </ul>
+
+           <p><span class="label">Notes:</span> Voice over character's lines can be filmed off set, some voice over lines need to be filmed before shoot date.</p>
+         </div>
+       </article>
+     </div>
+
+
+
     </div>
 
     <!-- Shown only when a filter matches zero films -->
@@ -541,7 +621,7 @@
 
   </main>
 
-
+  
   <!-- ==================== GENERAL INFO ==================== -->
   <section id="general-info" class="container pb-5 mb-4">
     <h2 class="section-title font-display">General Info</h2>
